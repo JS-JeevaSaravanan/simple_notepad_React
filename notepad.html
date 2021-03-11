@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center> <span id="head" style="font-size: large;">Notepad</span></center>
+    <textarea id = "textarea" style="width: 100%; "></textarea><br />
+    <button id="savebtn">Save</button>
+    <script>
+        document.body.onload = ()=> {
+
+            /*
+                setInterval(()=>{
+                    window.location.reload()
+                }, 1000)
+            */
+
+            let txt = document.getElementById("textarea");
+            let head = document.getElementById("head");
+            txt.style.height = (0.85 * screen.height) +'px ';
+            txt.style.resize = "none";
+
+            document.getElementById("savebtn").onclick = () => {
+                let xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "/save");
+                xhttp.send(JSON.stringify(
+                    {
+                    "text": document.getElementById("textarea").value,
+                    })
+                );
+            }
+        }
+    </script>
+    
+    
+</body>
+</html>
+
